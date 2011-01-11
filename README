@@ -1,0 +1,26 @@
+--------------------------------------------------------------------------------
+
+VÝPISKY
+(c) 2006-2011 Petr Nohejl
+
+Soubor studijních materiálů (výpisků) zaměřených na IT. V českém jazyce.
+
+Collection of study materials (cheatsheets) focused on IT. All in Czech.
+
+--------------------------------------------------------------------------------
+
+OBSAH REPOZITÁŘE:
+
+[src]                  - všechny výpisky ve formátu .doc nebo .docx
+c_vypisky.pdf          - výpisky o programovacím jazyce C
+css_hack_vypisky.pdf   - výpisky o CSS hackování
+css_vypisky.pdf        - výpisky o stylech CSS
+django_vypisky.pdf     - výpisky o webovém frameworku Django (Python)
+haskell_vypisky.pdf    - výpisky o funkcionálním programovacím jazyce Haskell
+html_vypisky.pdf       - výpisky o značkovacím jazyce HTML
+java_vypisky.pdf       - výpisky o programovacím jazyce Java
+python_vypisky.pdf     - výpisky o skriptovacím jazyce Python
+seo_vypisky.pdf        - výpisky o SEO optimalizaci
+unix_vypisky.pdf       - výpisky o operačním systému Unix (Kubuntu)
+
+--------------------------------------------------------------------------------

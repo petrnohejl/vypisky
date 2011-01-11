@@ -1,0 +1,145 @@
+peno: tvoje vypisky k pythonu jsou celkem pekny, akorat bych rad dodal par veci 
+
+str 5 - modifikace seznamu - kopirovani
+
+Metody kopirovani, ktery tam mas uvedeny jsou samozrejme v poradku, jen by bylo dobre podotknout, ze jsou 'bezpecne' pouze pro seznamy jejihz vsechny prvky jsou nemenitelne(immutable) [1]. Kriticky priklad budiz napriklad:
+
+Kód:
+>>> a = [1, [2, 3]]
+>>> b = a[:]
+>>> b[1].append('4')
+>>> print b
+[1, [2, 3, 4]]
+>>> print a
+[1, [2, 3, 4]]
+
+
+Stejny problem nastane, pokud je prvkem seznamu instance tridy, ktera se chova jako menitelny datovy typ - tzn pri zmene atributu nevraci novou instanci sama sebe, ale jen zmeni dany atribut (takze v podstate temer vsechny ne-core tridy)
+
+Pokud je potreba udelat bezpecnou kopii, je treba pouzit metodu deepcopy z modulu copy
+
+Kód:
+>>> from copy import deepcopy
+>>> a = [1, [2, 3]]
+>>> b = deepcopy(a)
+>>> b[1].append('4')
+>>> print b
+[1, [2, 3, 4]]
+>>> print a
+[1, [2, 3]]
+
+
+
+str. 9 - modul string
+
+Doporucuje se (na konkretni PEP si ted nevzpomenu) pouzivat spise tridni metody(snad je ten termin spravne) vlastnich instanci retezce, nez modul string. Priklad pro nazornost:
+
+Kód:
+>>> a = "Ahoj Pepo"
+>>> a.split(' ')
+['Ahoj', 'Pepo']
+>>> a.swapcase()
+'aHOJ pEPO'
+....
+
+
+
+str. 12 - rizeni behu programu - cyklus for
+
+Mozna by bylo dobre explicitne rict, ze for cyklus v pythonu je vlastne spis for-each cyklus (proto se taky pouzivat range, ktere naganeruje seznam cisel  ).
+Jsou ale i pripady kdy to usnadnuje zivot, napr.
+
+Kód:
+>>> a = [[1,2], [3,4]]
+>>> for x,y in a:
+   print x*y
+
+2
+12
+
+
+Avsak for-each chovanim vznika drobny 'problem' souvisejici s nemenitelnosti datovych typu - nefunguje nasledujici konstrukce
+
+Kód:
+>>> a = [1,2]
+>>> for x in a:
+   x = x*2
+
+
+Intuitivne by se dalo cekat, ze se seznam a zmeni, ale protoze jeno prvky jsou nemenitelne, nic se s nim nestane. Reseni je nekolik - par dokonce peknych na pohled (pro zkuseneho pythonyra  )
+
+Kód:
+>>> a = [1,2]
+>>> #1) asi nejhorsi mozny zpusob - pole vlastne dvakrat sekvencne projde (prvni pruchod je na spocitani delky)
+>>> for i in range(len(a)):
+   a[i] *= 2
+
+>>> #2) lepsi zpusob - tenhle uz pouziva iterator, ktery v ka zdem kroku vraci tuple (index, hodnota)
+>>> for i, prvek in enumerate(a):
+   a[i] *= 2
+
+>>> #3) pekny zpusob pomoci funkcionalniho pristupu - bohuzel od pythonu bude nejspis nepouzitelny, protoze Guido planuje funkcionalni pristup z pythonu odstranit
+>>> a = map(lambda x: x*2, a)
+
+>>> #4) taktez pekny (a nikoli potencionalne nepouzitelny) zpusob pomoci list comprehensions [2]
+>>> a = [prvek*2 for prvek in a]
+
+
+
+str. 19 - cteni a zapis do souboru - funkce pro cteni a zapis
+
+Zde jen dodatek, ze pokud chceme soubor zpracovavat po radcich a soucasne nepotrebujeme mit v kazdem okamziku pristup ke vsem radkum ze souboru, lze vyuzit toho, ze otevreny soubor se chova jako iterator nad svymi radky. Vyhoda je zjevna - soubor se pri zpracovani nebude v pameti cely, ale vzdy jen jeden jeho radek.
+
+Kód:
+>>> f_in = open('soubor.txt', 'r')
+>>> for line in f_in:
+   print line
+
+
+
+str. 22 - skripty
+
+Pri volani funkce main() je lepsi pouzit konstrukci
+
+Kód:
+if __name__ == "__main__":
+    main()
+
+
+Jeji vyhoda spociva v tom, ze se funkce main() zavola jen pokud se dany zdrojovy soubor opravdu spousti jako skript. Postup uvedeny ve tvych vypiscich by funkci main() spustil i v pripade, ze by se tento zdrojovy soubor importoval jako knihovna.
+
+[1] http://wraith.iglu.cz/python/zaklady-typy-menitelnost.php
+[2] http://www.python.org/dev/peps/pep-0202/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print r"C:\" # neupravené øetìzce (ruší význam spec. znakù) - -- raw strings cannot end with a \  
+
+
+
+
+
